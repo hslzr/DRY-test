@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 4567:4567
+    depends_on:
+      - db
+    env_file: .env.development
+    command: bundle exec shotgun config.ru --server=thin --port=4567 --host=0.0.0.0
+
+  db:
+    image: postgres:9.6.3-alpine
+    env_file: .env.development
+    volumes:
+      - /home/salazar/dry/db-data:/var/lib/postgresql/data

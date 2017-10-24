@@ -1,0 +1,6 @@
+# Ignore .env files
+.env.*
+!.env.example
+
+# Ignore database data
+db-data/
